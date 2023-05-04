@@ -34,9 +34,11 @@
                 </form>
             </td>
             </td>
-
         </tr>
         @endforeach
         </table>
+        <div class="my-2" align="right">
+            <a class="btn btn-primary" href="articles/cetak_pdf"> Cetak PDF </a>
+        </div>
         @endsection
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use PDF;
 
 class ArticleController extends Controller
 {
@@ -104,8 +105,17 @@ class ArticleController extends Controller
      * @param  \App\Models\Article  $article
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Article $article)
+    public function destroy($id)
     {
-        //
+        //fungsi eloquent untuk menghapus data
+        Article::find($id)->delete();
+        return redirect()->route('articles.index')
+        -> with('success', 'Articles Berhasil Dihapus');
+    }
+
+    public function cetak_pdf(){
+        $articles = Article::all();
+        $pdf = PDF::loadview('articles.articles_pdf',['articles' => $articles]);
+        return $pdf->stream();
     }
 }
