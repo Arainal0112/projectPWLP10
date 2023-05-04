@@ -17,16 +17,26 @@
         <th>Judul</th>
         <th>Konten</th>
         <th>Gambar</th>
-    </tr>
-    @foreach ($articles as $article)
-    <tr>
-        <td>{{ $article->title}}</td>
-        <td>{{ $article->content }}</td>
-        <td class="col-md-6"><img width="100%" src="{{asset('storage/'.$article->featured_image)}}"></td>
-        
-        </td>
+        <th>Aksi</th>
+        </tr>
+        @foreach ($articles as $article)
+        <tr>
+            <td>{{ $article->title}}</td>
+            <td>{{ $article->content }}</td>
+            <td class="col-md-6"><img width="100%" src="{{asset('storage/'.$article->featured_image)}}"></td>
+            <td class="col-md-2" align="center">
 
-    </tr>
-    @endforeach
-</table>
-@endsection
+                <form action="{{ route('articles.destroy',$article->id) }}" method="POST">
+                    <a class="btn btn-primary" href="{{ route('articles.edit',$article->id) }}">Edit</a>
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </td>
+            </td>
+
+        </tr>
+        @endforeach
+        </table>
+        @endsection
+
